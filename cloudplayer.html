@@ -1,0 +1,374 @@
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta name="viewport"content="width=device-width,initial-scale=1">
+</head>
+<body>
+
+<style>
+body{
+align-items:center;
+justify-content:center;
+display:flex;
+}
+.main{
+width:100vw;
+height:100vh;
+background:lightgrey;
+place-items:center;
+display:grid;
+}
+.music-container{
+width:16rem;
+height:25rem;
+background:#ffffff;
+padding:3rem;
+text-align:center;
+border-radius:2rem;
+box-shadow:0 3px 5px 3px  rgba(0,0,0,0.2),0 3px 5px 3px  black;
+}
+
+img{
+width:180px;
+height:180px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.fa-play{
+margin-top:-70px;
+margin-left:90px;
+font-size:30px;
+background:black;
+color:white;
+width:70px;
+height:70px;
+text-align:center;
+justify-content:center;
+align-items:center;
+display:flex;
+border-radius:50%;
+cursor:pointer;
+}
+
+.fa-pause{
+margin-top:-70px;
+margin-left:90px;
+font-size:30px;
+background:black;
+color:white;
+width:70px;
+height:70px;
+text-align:center;
+justify-content:center;
+align-items:center;
+display:flex;
+border-radius:50%;
+cursor:pointer;
+}
+.fa-backward{
+margin-top:30px;
+margin-left:-10px;
+font-size:30px;
+background:black;
+color:white;
+width:70px;
+height:70px;
+text-align:center;
+justify-content:center;
+align-items:center;
+display:flex;
+border-radius:50%;
+cursor:pointer;
+}
+.fa-forward{
+margin-top:-70px;
+margin-left:190px;
+font-size:30px;
+background:black;
+color:white;
+width:70px;
+height:70px;
+text-align:center;
+justify-content:center;
+align-items:center;
+display:flex;
+border-radius:50%;
+cursor:pointer;
+}
+.anim{
+animation:play 2s linear infinite;
+}
+@keyframes play{
+from{
+transform:rotate(0deg);
+}
+to{
+transform:rotate(360deg);
+}
+}
+
+</style>
+<div class="main">
+<div class="music-container">
+<h2 id="title">Jameen pe randa si </h2>
+<h3 id="artist">B-Prak</h3>
+<div class="img-container">
+<img src="record.jpg">
+
+</div>
+<audio src="arun.mp3"type="audio/mp3"></audio>
+<div class="music-controls"></div>
+<i class="fa fa-backward" aria-hidden="true"id="prev"title="previus"></i>
+<i class="fa fa-play" aria-hidden="true"id="play"title="play"></i>
+<i class="fa fa-forward" aria-hidden="true"id="next"title="next"></i>
+</div>
+</div>
+<script>
+const music=document.querySelector("audio");
+const img=document.querySelector("img");
+const play=document.getElementById("play");
+const artist=document.getElementById("artist");
+const title=document.getElementById("title");
+const prev=document.getElementById("prev");
+const next=document.getElementById("next");
+const songs=[
+{
+name: "arun",
+title: "Jameen pe randa si ",
+artist: "B-Prak",
+img: "record",
+},
+{
+name: "baten",
+title: "Baten ye kabhi",
+artist: "Arjit singh",
+img: "record",
+},
+{
+name: "best",
+title: "Kabhi jo Badal Barse",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "beu",
+title: "Dil diya galla ",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "bin",
+title: "Bin tere kya yara mera ",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "dekhle",
+title: "Tu aake Dekhle  ",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "dhoop",
+title: "Jo tenu Dhoop lagya ",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "hawa",
+title: "Banke hawa men ",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "janam",
+title: "Janam janam saath",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "jit",
+title: "Jitni dafa dekhun",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "main",
+title: "Chanda chakoriya ",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "nikal",
+title: "Dhoop se nikal ke",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "rasta",
+title: "Chod diya bo rasta",
+artist: "Arjit singh",
+img: "record",
+},
+{
+name: "rock",
+title: "Rockstar song",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "safar",
+title: "Lamba safar hai",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "sandra",
+title: "Moya dikya sandra",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "tera",
+title: "Abhi abhi to mile the",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "too",
+title: "Main jameen to ashma ",
+artist: "Darshan Raval",
+img: "record",
+},
+{
+name: "tu",
+title: "Karta nahi kyo yakeen ",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "yaar",
+title: "Mere yaar purane",
+artist: "Sumit goswami",
+img: "record",
+},
+{
+name: "yara",
+title: "Juda to na hona ",
+artist: "Moh. Faiz",
+img: "record",
+},
+{
+name: "bapu",
+title: "Bapu tera putra star",
+artist: "Sumit goswami",
+img: "record",
+},
+{
+name: "yaraa",
+title: "Gaddi se-utar lagjata",
+artist: "Sumit goswami",
+img: "record",
+},
+{
+name: "neend",
+title: "Neend-men sare yaar",
+artist: "Sumit goswami",
+img: "record",
+},
+{
+name: "mainu",
+title: "Mainu maaf kari maan",
+artist: "Unknown",
+img: "record",
+},
+{
+name: "sambeef",
+title: "Sambeef song",
+artist: "Sidhu musewala",
+img: "record",
+},
+{
+name: "Legend",
+title: "Legend song",
+artist: "Sidhu musewala",
+img: "record",
+},
+{
+name: "Eastside",
+title: "Eastside khade bathe ",
+artist: "Sidhu musewala",
+img: "record",
+},
+{
+name: "Divel",
+title: "Divel song farari chale",
+artist: "Sidhu musewala",
+img: "record",
+},
+{
+name: "siddhu1",
+title: "Daasput tera hai don",
+artist: "Sidhu musewala",
+img: "record",
+},
+{
+name: "shadi",
+title: "Aaj mere yaar ki shadi",
+artist: "Sumit goswami",
+img: "record",
+},
+{
+name: "birthday",
+title: "Birthday yara ke yaar ka ",
+artist: "Sumit goswami",
+img: "record",
+},
+{
+name: "jigriyar",
+title: "Simple yara ke jigri yaar",
+artist: "Sumit goswami",
+img: "record",
+},
+];
+let isPlaying=false;
+const playMusic=()=>{
+isPlaying=true;
+music.play();
+play.classList.replace('fa-play',"fa-pause");
+img.classList.add("anim");
+}
+const pauseMusic=()=>{
+isPlaying=false;
+music.pause();
+play.classList.replace("fa-pause","fa-play");
+img.classList.remove("anim");
+}
+play.addEventListener('click',()=>{
+isPlaying ? pauseMusic() : playMusic();
+});
+const loadSong= (songs)=>{
+title.textContent=songs.title;
+artist.textContent=songs.artist;
+music.src=songs.name + ".mp3";
+img.src=songs.img + ".jpg";
+};
+songIndex=0;
+const nextSong=()=>{
+songIndex=(songIndex + 1)% songs.length;
+loadSong(songs[songIndex]);
+playMusic();
+};
+const prevSong=()=>{
+songIndex=(songIndex - 1 + songs.length) % songs.length;
+loadSong(songs[songIndex]);
+playMusic();
+};
+next.addEventListener("click", nextSong);
+prev.addEventListener("click", prevSong);
+
+</script>
+</body>
+</html>
